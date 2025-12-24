@@ -487,7 +487,7 @@ function toggleSettings(e) {
     if (!settingsPanel) return;
 
     // 检查是否有管理员密码
-    const hasAdminPassword = (window.__ENV__ && window.__ENV__.ADMINPASSWORD) && 
+    const hasAdminPassword = window.__ENV__?.ADMINPASSWORD && 
                            window.__ENV__.ADMINPASSWORD.length === 64 && 
                            !/^0+$/.test(window.__ENV__.ADMINPASSWORD);
 
@@ -767,13 +767,13 @@ async function search() {
                             <div class="flex-grow">
                                 <h3 class="font-semibold mb-2 break-words line-clamp-2 ${hasCover ? '' : 'text-center'}" title="${safeName}">${safeName}</h3>
                                 
-                                <div class="flex flex-wrap ${hasCover ? '' : 'justify-center'} gap-1 mb-2">
+                                <div class="flex flex-wrap ${hasCover ? '' : 'justify-center'} mb-2">
                                     ${(item.type_name || '').toString().replace(/</g, '&lt;') ?
-                    `<span class="text-xs py-0.5 px-1.5 rounded bg-opacity-20 bg-blue-500 text-blue-300">
+                    `<span class="text-xs py-0.5 px-1.5 rounded bg-opacity-20 bg-blue-500 text-blue-300 mr-1 mb-1">
                                           ${(item.type_name || '').toString().replace(/</g, '&lt;')}
                                       </span>` : ''}
                                     ${(item.vod_year || '') ?
-                    `<span class="text-xs py-0.5 px-1.5 rounded bg-opacity-20 bg-purple-500 text-purple-300">
+                    `<span class="text-xs py-0.5 px-1.5 rounded bg-opacity-20 bg-purple-500 text-purple-300 mr-1 mb-1">
                                           ${item.vod_year}
                                       </span>` : ''}
                                 </div>
@@ -953,10 +953,10 @@ async function showDetails(id, vod_name, sourceCode) {
 
             modalContent.innerHTML = `
                 ${detailInfoHtml}
-                <div class="flex flex-wrap items-center justify-between mb-4 gap-2">
-                    <div class="flex items-center gap-2">
+                <div class="flex flex-wrap items-center justify-between mb-4">
+                    <div class="flex items-center space-x-2 mb-2 sm:mb-0">
                         <button onclick="toggleEpisodeOrder('${sourceCode}', '${id}')" 
-                                class="px-3 py-1.5 bg-[#333] hover:bg-[#444] border border-[#444] rounded text-sm transition-colors flex items-center gap-1">
+                                class="px-3 py-1.5 bg-[#333] hover:bg-[#444] border border-[#444] rounded text-sm transition-colors flex items-center space-x-1">
                             <svg class="w-4 h-4 transform ${episodesReversed ? 'rotate-180' : ''}" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
                             </svg>

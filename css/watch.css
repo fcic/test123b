@@ -1,8 +1,8 @@
 /* 添加重定向页面的基本样式 */
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: var(--secondary-color);
-    color: var(--text-color);
+    background-color: #0f1622;
+    color: white;
     margin: 0;
     padding: 0;
     height: 100vh;
@@ -16,10 +16,12 @@ body {
     max-width: 90%;
     width: 380px;
     padding: 2rem;
-    background-color: var(--secondary-color);
+    background-color: rgba(0, 0, 0, 0.3);
     border-radius: 16px;
-    box-shadow: var(--neumorph-shadow-dark), var(--neumorph-shadow-light);
-    border: none;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .logo-container {
@@ -32,14 +34,17 @@ body {
 .logo-icon {
     width: 40px;
     height: 40px;
-    color: var(--primary-color);
+    color: #00ccff;
     margin-right: 10px;
 }
 
 .logo-text {
     font-size: 2rem;
     margin: 0;
-    color: var(--primary-color);
+    background: linear-gradient(to right, #00ccff, #ff3c78);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
 .loading-animation {
@@ -48,7 +53,7 @@ body {
     height: 50px;
     border: 3px solid rgba(255, 255, 255, 0.2);
     border-radius: 50%;
-    border-top-color: var(--primary-color);
+    border-top-color: #00ccff;
     animation: spin 1s linear infinite;
     margin-bottom: 20px;
 }
@@ -65,29 +70,29 @@ body {
 
 #redirect-status {
     font-size: 0.9rem;
-    color: var(--text-muted);
+    color: #8599b2;
     margin-bottom: 1.5rem;
     height: 20px;
 }
 
 .redirect-hint {
     font-size: 0.9rem;
-    color: var(--text-muted);
+    color: #8599b2;
     margin-top: 20px;
 }
 
 .redirect-hint a {
-    color: var(--primary-color);
+    color: #00ccff;
     text-decoration: none;
     font-weight: 500;
     transition: all 0.2s ease;
     padding: 5px 10px;
     border-radius: 4px;
-    background-color: rgba(85, 139, 139, 0.1);
+    background-color: rgba(0, 204, 255, 0.1);
 }
 
 .redirect-hint a:hover {
-    background-color: rgba(85, 139, 139, 0.2);
+    background-color: rgba(0, 204, 255, 0.2);
     text-decoration: underline;
 }
 

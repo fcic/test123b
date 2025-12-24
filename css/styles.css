@@ -12,24 +12,22 @@ LibreTV 全局样式
     position: absolute;
     top: 12px;
     right: 12px;
-    background: var(--secondary-color);
-    border: none;
-    border-radius: 50%;
-    padding: 8px;
-    color: var(--text-color);
+    background: #222;
+    border: 1px solid #333;
+    border-radius: 8px;
+    padding: 6px;
+    color: white;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
     transition: all 0.2s ease;
     z-index: 10;
-    box-shadow: var(--neumorph-shadow-dark), var(--neumorph-shadow-light);
 }
 
 .close-btn:hover {
-    background: var(--secondary-color);
-    box-shadow: var(--neumorph-shadow-inset);
-    color: var(--accent-color);
+    background: #333;
+    border-color: #555;
 }
 
 .close-btn svg {
@@ -39,29 +37,33 @@ LibreTV 全局样式
 }
 
 :root {
-    /* 复古网页 + 扁平化 + 新拟物风格 */
-    --primary-color: #558b8b;       /* 复古青色 */
-    --primary-light: #76a5a5;       /* 浅青色 */
-    --secondary-color: #e8e4d9;     /* 复古米色背景 */
-    --accent-color: #d96c06;        /* 复古橙色 */
-    --text-color: #333333;          /* 深灰文本 */
-    --text-muted: #666666;          /* 中灰文本 */
-    --border-color: #d1cdc0;        /* 边框颜色 */
-    
-    /* 新拟物阴影 */
-    --neumorph-shadow-light: -6px -6px 12px #ffffff;
-    --neumorph-shadow-dark: 6px 6px 12px #c5c1b7;
-    --neumorph-shadow-inset: inset 4px 4px 8px #c5c1b7, inset -4px -4px 8px #ffffff;
-    
-    --page-gradient-start: #e8e4d9;
-    --page-gradient-end: #e0dbce;
-    --card-bg: #e8e4d9;
+    /* 赛博影视主题配色方案 - 柔和版 */
+    --primary-color: #00ccff;       /* 霓虹蓝主色调 */
+    --primary-light: #33d6ff;       /* 浅霓虹蓝变体 */
+    --secondary-color: #0f1622;     /* 深蓝黑背景色 */
+    --accent-color: #ff3c78;        /* 霓虹粉强调色 */
+    --text-color: #e6f2ff;          /* 柔和的蓝白色文本 */
+    --text-muted: #8599b2;          /* 淡蓝灰色次级文本 */
+    --border-color: rgba(0, 204, 255, 0.15);
+    --page-gradient-start: #0f1622; /* 深蓝黑起始色 */
+    --page-gradient-end: #192231;   /* 深靛蓝结束色 */
+    --card-gradient-start: #121b29; /* 卡片起始色 */
+    --card-gradient-end: #1c2939;   /* 卡片结束色 */
+    --card-accent: rgba(0, 204, 255, 0.12); /* 霓虹蓝卡片强调色 */
+    --card-hover-border: rgba(0, 204, 255, 0.5); /* 悬停边框颜色 */
 }
 
 .page-bg {
-    background-color: var(--secondary-color);
+    background: linear-gradient(180deg, var(--page-gradient-start), var(--page-gradient-end));
     min-height: 100vh;
-    color: var(--text-color);
+    /* 柔和赛博点状背景 */
+    background-image: 
+        linear-gradient(180deg, var(--page-gradient-start), var(--page-gradient-end)),
+        radial-gradient(circle at 25px 25px, rgba(0, 204, 255, 0.04) 2px, transparent 3px),
+        radial-gradient(circle at 75px 75px, rgba(255, 60, 120, 0.02) 1px, transparent 2px),
+        radial-gradient(circle at 50px 50px, rgba(150, 255, 250, 0.015) 1px, transparent 2px);
+    background-blend-mode: normal;
+    background-size: cover, 100px 100px, 50px 50px, 75px 75px;
 }
 
 button, .card-hover {
@@ -70,21 +72,15 @@ button, .card-hover {
 
 /* 改进卡片适应不同内容长度 */
 .card-hover {
-    border: none;
-    background: var(--card-bg);
-    box-shadow: var(--neumorph-shadow-dark), var(--neumorph-shadow-light);
-    border-radius: 12px;
+    border: 1px solid var(--border-color);
+    background: linear-gradient(135deg, var(--card-gradient-start), var(--card-gradient-end));
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
     position: relative;
     overflow: hidden;
+    border-radius: 6px;
     display: flex;
     flex-direction: column;
     height: 100%;
-    color: var(--text-color);
-}
-
-.card-hover:hover {
-    transform: translateY(-2px);
-    box-shadow: 8px 8px 16px #c5c1b7, -8px -8px 16px #ffffff;
 }
 
 /* 确保卡片内容区域高度一致性 */
@@ -354,18 +350,17 @@ body {
     -moz-appearance: none;
     height: 14px;
     width: 14px;
-    background-color: var(--secondary-color);
-    border: none;
+    background-color: #222;
+    border: 1px solid #333;
     border-radius: 3px;
     cursor: pointer;
     position: relative;
     outline: none;
-    box-shadow: var(--neumorph-shadow-inset);
 }
 
 .form-checkbox:checked {
     background-color: var(--primary-color);
-    box-shadow: var(--neumorph-shadow-dark), var(--neumorph-shadow-light);
+    border-color: var(--primary-color);
 }
 
 .form-checkbox:checked::after {
@@ -383,7 +378,7 @@ body {
 /* API滚动区域美化 */
 #apiCheckboxes {
     scrollbar-width: thin;
-    scrollbar-color: #d1cdc0 var(--secondary-color);
+    scrollbar-color: #444 #222;
 }
 
 #apiCheckboxes::-webkit-scrollbar {
@@ -391,19 +386,19 @@ body {
 }
 
 #apiCheckboxes::-webkit-scrollbar-track {
-    background: var(--secondary-color);
+    background: #222;
     border-radius: 4px;
 }
 
 #apiCheckboxes::-webkit-scrollbar-thumb {
-    background-color: #d1cdc0;
+    background-color: #444;
     border-radius: 4px;
 }
 
 /* 自定义API列表样式 */
 #customApisList {
     scrollbar-width: thin;
-    scrollbar-color: #d1cdc0 var(--secondary-color);
+    scrollbar-color: #444 #222;
 }
 
 #customApisList::-webkit-scrollbar {
@@ -415,7 +410,7 @@ body {
 }
 
 #customApisList::-webkit-scrollbar-thumb {
-    background-color: #d1cdc0;
+    background-color: #444;
     border-radius: 4px;
 }
 

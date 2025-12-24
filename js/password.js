@@ -25,7 +25,7 @@ window.isPasswordProtected = isPasswordProtected;
 // 统一验证函数
 async function verifyPassword(password, passwordType = 'PASSWORD') {
     try {
-        const correctHash = (window.__ENV__ && window.__ENV__[passwordType]);
+        const correctHash = window.__ENV__?.[passwordType];
         if (!correctHash) return false;
 
         const inputHash = await sha256(password);
@@ -62,7 +62,7 @@ function isVerified(passwordType = 'PASSWORD') {
         if (!stored) return false;
 
         const { timestamp, passwordHash } = JSON.parse(stored);
-        const currentHash = (window.__ENV__ && window.__ENV__[passwordType]);
+        const currentHash = window.__ENV__?.[passwordType];
 
         return timestamp && passwordHash === currentHash &&
             Date.now() - timestamp < PASSWORD_CONFIG.verificationTTL;
@@ -181,7 +181,7 @@ function initPasswordProtection() {
     }
     
     // 检查是否有普通密码
-    const hasNormalPassword = (window.__ENV__ && window.__ENV__.PASSWORD) && 
+    const hasNormalPassword = window.__ENV__?.PASSWORD && 
                            window.__ENV__.PASSWORD.length === 64 && 
                            !/^0+$/.test(window.__ENV__.PASSWORD);
     

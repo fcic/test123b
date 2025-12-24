@@ -1570,8 +1570,7 @@ async function showSwitchResourceModal() {
         
         // 修复 isCurrentSource 判断，确保类型一致
         const isCurrentSource = String(sourceKey) === String(currentSourceCode) && String(result.vod_id) === String(currentVideoId);
-        const sourceOption = resourceOptions.find(opt => opt.key === sourceKey);
-        const sourceName = sourceOption ? sourceOption.name : '未知资源';
+        const sourceName = resourceOptions.find(opt => opt.key === sourceKey)?.name || '未知资源';
         
         html += `
             <div class="relative group ${isCurrentSource ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer hover:scale-105 transition-transform'}" 

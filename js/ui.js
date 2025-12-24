@@ -228,7 +228,7 @@ function renderSearchHistory() {
 
     history.forEach(item => {
         const tag = document.createElement('button');
-        tag.className = 'search-tag flex items-center gap-1';
+        tag.className = 'search-tag flex items-center space-x-1 m-1';
         const textSpan = document.createElement('span');
         textSpan.textContent = item.text;
         tag.appendChild(textSpan);

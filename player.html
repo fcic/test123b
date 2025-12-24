@@ -21,7 +21,7 @@
     <meta http-equiv="Expires" content="0">
 </head>
 <body>
-    <header class="player-header-fixed p-4 flex items-center border-b border-[#333] gap-2">
+    <header class="player-header-fixed p-4 flex items-center border-b border-[#333] space-x-2">
         <div class="flex items-center min-w-0">
             <button id="homeButton" type="button" class="flex items-center min-w-0 cursor-pointer home-button">
                 <svg class="w-8 h-8 mr-2 text-[#00ccff] logo-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -106,9 +106,9 @@
 
         <!-- 添加自动播放开关和排序按钮 -->
         <div class="player-container mb-2">
-            <div class="flex flex-wrap justify-end items-center gap-2">
+            <div class="flex flex-wrap justify-end items-center">
                 <!-- 自动连播开关 - 分组到左边 -->
-                <div class="flex items-center gap-1 flex-shrink-0 mr-auto">
+                <div class="flex items-center space-x-1 flex-shrink-0 mr-auto mb-2 sm:mb-0">
                     <span class="text-gray-400 text-sm whitespace-nowrap">自动连播</span>
                     <label class="switch">
                         <input type="checkbox" id="autoplayToggle">
@@ -117,9 +117,9 @@
                 </div>
                 
                 <!-- 把各种功能按钮放在右侧 - 在小屏幕上各自占一行 -->
-                <div class="flex flex-wrap justify-end gap-2">
+                <div class="flex flex-wrap justify-end space-x-2">
                     <!-- 倒序排列按钮 -->
-                    <button onclick="toggleEpisodeOrder()" class="px-3 py-1 bg-[#222] hover:bg-[#333] border border-[#333] rounded-lg transition-colors flex items-center space-x-1 flex-shrink-0">
+                    <button onclick="toggleEpisodeOrder()" class="px-3 py-1 bg-[#222] hover:bg-[#333] border border-[#333] rounded-lg transition-colors flex items-center space-x-1 flex-shrink-0 mb-2 sm:mb-0">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" id="orderIcon" viewBox="0 0 20 20" fill="currentColor">
                             <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v3.586L7.707 9.293a1 1 0 00-1.414 1.414l3 3a1 1 0 001.414 0l3-3a1 1 0 00-1.414-1.414L11 10.586V7z" clip-rule="evenodd" />
                         </svg>
