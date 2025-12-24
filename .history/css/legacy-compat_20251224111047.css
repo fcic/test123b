@@ -1,0 +1,1700 @@
+/* 
+ * iPad mini 2 / iOS 9 兼容性修复
+ * 支持旧版Safari浏览器 (iOS 9及更早版本)
+ */
+
+/* ============================================
+   CSS Variables 回退值
+   iOS 9 Safari 不支持 CSS Custom Properties
+   ============================================ */
+
+/* 全局 body/html 回退 */
+body, html {
+    background-color: #e8e4d9;
+    color: #333333;
+}
+
+/* 为不支持 CSS Variables 的浏览器提供回退 */
+.page-bg {
+    background-color: #e8e4d9;
+    min-height: 100vh;
+    color: #333333;
+}
+
+.card-hover {
+    border: none;
+    background: #e8e4d9;
+    box-shadow: 6px 6px 12px #c5c1b7, -6px -6px 12px #ffffff;
+    border-radius: 12px;
+    position: relative;
+    overflow: hidden;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: column;
+    flex-direction: column;
+    height: 100%;
+    color: #333333;
+}
+
+.card-hover:hover {
+    -webkit-transform: translateY(-2px);
+    transform: translateY(-2px);
+    box-shadow: 8px 8px 16px #c5c1b7, -8px -8px 16px #ffffff;
+}
+
+/* 渐变文字 */
+.gradient-text {
+    background: -webkit-linear-gradient(left, #558b8b, #d96c06);
+    background: linear-gradient(to right, #558b8b, #d96c06);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* 设置面板 */
+.settings-panel {
+    background: -webkit-linear-gradient(315deg, #e0dbce, #e8e4d9);
+    background: linear-gradient(135deg, #e0dbce, #e8e4d9);
+    border-left: 1px solid #558b8b;
+    -webkit-transform: translateX(100%);
+    transform: translateX(100%);
+    -webkit-transition: -webkit-transform 0.3s ease;
+    transition: transform 0.3s ease;
+}
+
+.settings-panel.show {
+    -webkit-transform: translateX(0);
+    transform: translateX(0);
+}
+
+/* 历史记录面板 */
+.history-panel {
+    box-shadow: 2px 0 10px rgba(0,0,0,0.5);
+    -webkit-transition: -webkit-transform 0.3s ease-in-out;
+    transition: transform 0.3s ease-in-out;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    width: 320px;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    -webkit-overflow-scrolling: touch;
+}
+
+.history-panel.show {
+    -webkit-transform: translateX(0);
+    transform: translateX(0);
+}
+
+/* 关闭按钮 */
+.close-btn {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: #e8e4d9;
+    border: none;
+    border-radius: 50%;
+    padding: 8px;
+    color: #333333;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    cursor: pointer;
+    -webkit-transition: all 0.2s ease;
+    transition: all 0.2s ease;
+    z-index: 10;
+    box-shadow: 6px 6px 12px #c5c1b7, -6px -6px 12px #ffffff;
+}
+
+.close-btn:hover {
+    background: #e8e4d9;
+    box-shadow: inset 4px 4px 8px #c5c1b7, inset -4px -4px 8px #ffffff;
+    color: #d96c06;
+}
+
+/* ============================================
+   Flexbox 兼容性修复
+   添加 -webkit- 前缀
+   ============================================ */
+
+/* 基础 flex 容器 */
+.flex {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+}
+
+.flex-col,
+.flex-column {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: column;
+    flex-direction: column;
+}
+
+.flex-row {
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: row;
+    flex-direction: row;
+}
+
+.flex-wrap {
+    -webkit-flex-wrap: wrap;
+    flex-wrap: wrap;
+}
+
+.flex-1 {
+    -webkit-box-flex: 1;
+    -webkit-flex: 1 1 0%;
+    flex: 1 1 0%;
+}
+
+.flex-grow {
+    -webkit-box-flex: 1;
+    -webkit-flex-grow: 1;
+    flex-grow: 1;
+}
+
+.flex-shrink-0 {
+    -webkit-flex-shrink: 0;
+    flex-shrink: 0;
+}
+
+/* Flex 对齐 */
+.items-center {
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+}
+
+.items-start {
+    -webkit-box-align: start;
+    -webkit-align-items: flex-start;
+    align-items: flex-start;
+}
+
+.items-end {
+    -webkit-box-align: end;
+    -webkit-align-items: flex-end;
+    align-items: flex-end;
+}
+
+.items-stretch {
+    -webkit-box-align: stretch;
+    -webkit-align-items: stretch;
+    align-items: stretch;
+}
+
+.justify-center {
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+}
+
+.justify-between {
+    -webkit-box-pack: justify;
+    -webkit-justify-content: space-between;
+    justify-content: space-between;
+}
+
+.justify-start {
+    -webkit-box-pack: start;
+    -webkit-justify-content: flex-start;
+    justify-content: flex-start;
+}
+
+.justify-end {
+    -webkit-box-pack: end;
+    -webkit-justify-content: flex-end;
+    justify-content: flex-end;
+}
+
+/* ============================================
+   Grid 布局回退为 Flexbox
+   iOS 9 不支持 CSS Grid
+   ============================================ */
+
+/* 搜索结果网格 - 使用 flexbox 替代 grid */
+.search-results-grid,
+#results,
+#douban-results {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-wrap: wrap;
+    flex-wrap: wrap;
+    margin: -0.5rem;
+}
+
+.search-results-grid > *,
+#results > *,
+#douban-results > * {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 0.5rem;
+    width: 100%;
+}
+
+/* 响应式宽度 - 手机 1列 */
+@media (max-width: 640px) {
+    .search-results-grid > *,
+    #results > *,
+    #douban-results > * {
+        width: 100%;
+    }
+}
+
+/* 平板竖屏 2列 */
+@media (min-width: 641px) and (max-width: 768px) {
+    .search-results-grid > *,
+    #results > * {
+        width: 50%;
+    }
+    #douban-results > * {
+        width: 33.333%;
+    }
+}
+
+/* 平板横屏 3列 */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .search-results-grid > *,
+    #results > * {
+        width: 33.333%;
+    }
+    #douban-results > * {
+        width: 25%;
+    }
+}
+
+/* 桌面 4列 */
+@media (min-width: 1025px) {
+    .search-results-grid > *,
+    #results > * {
+        width: 25%;
+    }
+    #douban-results > * {
+        width: 16.666%;
+    }
+}
+
+/* 大屏幕 */
+@media (min-width: 1280px) {
+    #douban-results > * {
+        width: 12.5%;
+    }
+}
+
+/* ============================================
+   Gap 属性回退
+   使用 margin 替代 gap
+   ============================================ */
+
+/* 替代 gap-1 */
+.gap-1 > * {
+    margin: 0.125rem;
+}
+
+/* 替代 gap-2 */
+.gap-2 > * {
+    margin: 0.25rem;
+}
+
+/* 替代 gap-3 */
+.gap-3 > * {
+    margin: 0.375rem;
+}
+
+/* 替代 gap-4 */
+.gap-4 > * {
+    margin: 0.5rem;
+}
+
+/* 替代 space-x-2 */
+.space-x-2 > * + * {
+    margin-left: 0.5rem;
+}
+
+/* 替代 space-y-2 */
+.space-y-2 > * + * {
+    margin-top: 0.5rem;
+}
+
+/* 替代 space-y-5 */
+.space-y-5 > * + * {
+    margin-top: 1.25rem;
+}
+
+/* ============================================
+   搜索区域样式
+   ============================================ */
+
+.search-box {
+    height: 3.5rem;
+    box-shadow: 6px 6px 12px #c5c1b7, -6px -6px 12px #ffffff;
+    border-radius: 1rem;
+    overflow: hidden;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-align: stretch;
+    -webkit-align-items: stretch;
+    align-items: stretch;
+    background: #e8e4d9;
+    padding: 4px;
+}
+
+.search-button {
+    width: 5rem;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    background: #558b8b;
+    color: white;
+    font-weight: 500;
+    -webkit-transition: all 0.2s;
+    transition: all 0.2s;
+    border-radius: 0.8rem;
+    margin-left: 4px;
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+}
+
+.search-button:hover {
+    background: #76a5a5;
+    -webkit-transform: translateY(-1px);
+    transform: translateY(-1px);
+}
+
+.search-input {
+    -webkit-box-flex: 1;
+    -webkit-flex: 1;
+    flex: 1;
+    background: #e8e4d9;
+    border: none;
+    color: #333333;
+    padding: 0 1.5rem;
+    font-size: 1rem;
+    outline: none;
+    -webkit-transition: all 0.2s;
+    transition: all 0.2s;
+    border-radius: 0.8rem;
+    box-shadow: inset 4px 4px 8px #c5c1b7, inset -4px -4px 8px #ffffff;
+}
+
+/* ============================================
+   表单控件样式
+   ============================================ */
+
+.form-checkbox {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    height: 14px;
+    width: 14px;
+    background-color: #e8e4d9;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    position: relative;
+    outline: none;
+    box-shadow: inset 4px 4px 8px #c5c1b7, inset -4px -4px 8px #ffffff;
+}
+
+.form-checkbox:checked {
+    background-color: #558b8b;
+    box-shadow: 6px 6px 12px #c5c1b7, -6px -6px 12px #ffffff;
+}
+
+/* ============================================
+   开关 Toggle 样式
+   ============================================ */
+
+.toggle-bg {
+    -webkit-transition: background-color 0.3s ease-in-out;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.toggle-dot {
+    -webkit-transition: -webkit-transform 0.3s ease-in-out;
+    transition: transform 0.3s ease-in-out;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+/* ============================================
+   Transform 兼容性
+   ============================================ */
+
+.transform {
+    -webkit-transform: translateX(0);
+    transform: translateX(0);
+}
+
+.translate-x-full {
+    -webkit-transform: translateX(100%);
+    transform: translateX(100%);
+}
+
+.-translate-x-full {
+    -webkit-transform: translateX(-100%);
+    transform: translateX(-100%);
+}
+
+/* ============================================
+   Transition 兼容性
+   ============================================ */
+
+.transition-all {
+    -webkit-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+}
+
+.transition-colors {
+    -webkit-transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+    transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+
+.transition-transform {
+    -webkit-transition: -webkit-transform 0.3s ease;
+    transition: transform 0.3s ease;
+}
+
+/* ============================================
+   动画 Animation
+   ============================================ */
+
+@-webkit-keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@-webkit-keyframes fadeOut {
+    from { opacity: 1; }
+    to { opacity: 0; }
+}
+
+@keyframes fadeOut {
+    from { opacity: 1; }
+    to { opacity: 0; }
+}
+
+#modal.show {
+    -webkit-animation: fadeIn 0.3s forwards;
+    animation: fadeIn 0.3s forwards;
+}
+
+#modal.hide {
+    -webkit-animation: fadeOut 0.3s forwards;
+    animation: fadeOut 0.3s forwards;
+}
+
+/* ============================================
+   滚动相关
+   iOS 惯性滚动
+   ============================================ */
+
+.overflow-y-auto,
+.overflow-x-auto {
+    -webkit-overflow-scrolling: touch;
+}
+
+/* ============================================
+   固定定位优化
+   ============================================ */
+
+.fixed {
+    position: fixed;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+}
+
+/* ============================================
+   按钮和交互元素
+   ============================================ */
+
+button, 
+.card-hover,
+a {
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
+}
+
+/* 顶角按钮 */
+.top-corner-button {
+    position: fixed;
+    z-index: 10;
+    background: #e8e4d9;
+    border: none;
+    border-radius: 12px;
+    padding: 0.5rem 1rem;
+    -webkit-transition: all 0.2s ease;
+    transition: all 0.2s ease;
+    color: #333333;
+    box-shadow: 6px 6px 12px #c5c1b7, -6px -6px 12px #ffffff;
+}
+
+.top-corner-button:hover {
+    background: #e8e4d9;
+    box-shadow: inset 4px 4px 8px #c5c1b7, inset -4px -4px 8px #ffffff;
+    color: #558b8b;
+}
+
+/* ============================================
+   最近搜索标签
+   ============================================ */
+
+.recent-search-tag {
+    display: inline-block;
+    padding: 0.4rem 1rem;
+    margin: 0.4rem;
+    background: #e8e4d9;
+    border: none;
+    border-radius: 20px;
+    color: #666666;
+    font-size: 0.875rem;
+    -webkit-transition: all 0.2s;
+    transition: all 0.2s;
+    box-shadow: 3px 3px 6px #c5c1b7, -3px -3px 6px #ffffff;
+}
+
+.recent-search-tag:hover {
+    color: #558b8b;
+    box-shadow: inset 3px 3px 6px #c5c1b7, inset -3px -3px 6px #ffffff;
+}
+
+/* ============================================
+   历史记录项
+   ============================================ */
+
+.history-item {
+    background: #1a1a1a;
+    border-radius: 6px;
+    border: 1px solid #333;
+    overflow: hidden;
+    -webkit-transition: all 0.2s ease;
+    transition: all 0.2s ease;
+    padding: 10px 14px;
+    position: relative;
+    margin-bottom: 8px;
+    width: 100%;
+}
+
+.history-item:hover {
+    -webkit-transform: translateY(-2px);
+    transform: translateY(-2px);
+    border-color: #444;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+/* ============================================
+   进度条
+   ============================================ */
+
+.progress-bar {
+    height: 3px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 2px;
+    overflow: hidden;
+    margin-bottom: 2px;
+}
+
+.progress-filled {
+    height: 100%;
+    background: -webkit-linear-gradient(left, #00ccff, #3b82f6);
+    background: linear-gradient(to right, #00ccff, #3b82f6);
+    border-radius: 2px;
+}
+
+/* ============================================
+   Toast 通知
+   ============================================ */
+
+#toast {
+    z-index: 9999;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    min-width: 200px;
+    text-align: center;
+    pointer-events: none;
+    -webkit-transform: translateX(-50%) translateY(0);
+    transform: translateX(-50%) translateY(0);
+    -webkit-transition: opacity 0.3s ease, -webkit-transform 0.3s ease;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+#toast.hidden {
+    opacity: 0;
+    -webkit-transform: translateX(-50%) translateY(-100%);
+    transform: translateX(-50%) translateY(-100%);
+}
+
+/* ============================================
+   模态框
+   ============================================ */
+
+#modal > div {
+    background: -webkit-linear-gradient(315deg, #0a0a0a, #111);
+    background: linear-gradient(135deg, #0a0a0a, #111);
+    border: 1px solid #558b8b;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7), 0 0 15px rgba(0, 204, 255, 0.1);
+    border-radius: 8px;
+}
+
+/* ============================================
+   页脚
+   ============================================ */
+
+.footer {
+    width: 100%;
+    -webkit-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+    margin-top: auto;
+    background: -webkit-linear-gradient(top, transparent, #e8e4d9);
+    background: linear-gradient(to bottom, transparent, #e8e4d9);
+    border-top: 1px solid #d1cdc0;
+}
+
+/* ============================================
+   Box Sizing 全局设置
+   ============================================ */
+
+*, *::before, *::after {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+/* ============================================
+   body 基础样式
+   ============================================ */
+
+body {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: column;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.container {
+    -webkit-box-flex: 1;
+    -webkit-flex: 1;
+    flex: 1;
+}
+
+/* ============================================
+   图片容器
+   ============================================ */
+
+.search-card-img-container {
+    width: 100px;
+    height: 150px;
+    overflow: hidden;
+    background-color: #191919;
+}
+
+.search-card-img-container img {
+    width: 100%;
+    height: 100%;
+    -o-object-fit: cover;
+    object-fit: cover;
+}
+
+/* ============================================
+   详情模态框
+   ============================================ */
+
+#modal .modal-detail-info {
+    background: -webkit-linear-gradient(315deg, #0a0a0a, #111);
+    background: linear-gradient(135deg, #0a0a0a, #111);
+    border: 1px solid #222;
+    border-radius: 8px;
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+#modal .detail-grid {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-wrap: wrap;
+    flex-wrap: wrap;
+}
+
+#modal .detail-grid > * {
+    width: 100%;
+    margin-bottom: 0.75rem;
+}
+
+@media (min-width: 768px) {
+    #modal .detail-grid > * {
+        width: 50%;
+    }
+}
+
+#modal .detail-item {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-wrap: wrap;
+    flex-wrap: wrap;
+}
+
+#modal .detail-item > * {
+    margin-right: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+/* ============================================
+   Watch.css 兼容性修复
+   ============================================ */
+
+/* 重定向页面容器 */
+.redirect-container {
+    text-align: center;
+    max-width: 90%;
+    width: 380px;
+    padding: 2rem;
+    background-color: #e8e4d9;
+    border-radius: 16px;
+    box-shadow: 6px 6px 12px #c5c1b7, -6px -6px 12px #ffffff;
+    border: none;
+}
+
+.redirect-container .logo-container {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+}
+
+.redirect-container .logo-icon {
+    width: 40px;
+    height: 40px;
+    color: #558b8b;
+    margin-right: 10px;
+}
+
+.redirect-container .logo-text {
+    font-size: 2rem;
+    margin: 0;
+    color: #558b8b;
+}
+
+.redirect-container .loading-animation {
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    border: 3px solid rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    border-top-color: #558b8b;
+    -webkit-animation: spin 1s linear infinite;
+    animation: spin 1s linear infinite;
+    margin-bottom: 20px;
+}
+
+@-webkit-keyframes spin {
+    to { -webkit-transform: rotate(360deg); transform: rotate(360deg); }
+}
+
+.redirect-container .redirect-message {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+    font-weight: 500;
+    color: #333333;
+}
+
+.redirect-container #redirect-status {
+    font-size: 0.9rem;
+    color: #666666;
+    margin-bottom: 1.5rem;
+    height: 20px;
+}
+
+.redirect-container .redirect-hint {
+    font-size: 0.9rem;
+    color: #666666;
+    margin-top: 20px;
+}
+
+.redirect-container .redirect-hint a {
+    color: #558b8b;
+    text-decoration: none;
+    font-weight: 500;
+    -webkit-transition: all 0.2s ease;
+    transition: all 0.2s ease;
+    padding: 5px 10px;
+    border-radius: 4px;
+    background-color: rgba(85, 139, 139, 0.1);
+}
+
+.redirect-container .redirect-hint a:hover {
+    background-color: rgba(85, 139, 139, 0.2);
+    text-decoration: underline;
+}
+
+/* ============================================
+   Player.css 兼容性修复
+   ============================================ */
+
+/* 播放器固定头部 */
+.player-header-fixed {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 9000;
+    pointer-events: auto;
+    background: #e8e4d9;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+}
+
+/* 播放器容器 */
+.player-container {
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+#player {
+    width: 100%;
+    height: 60vh;
+}
+
+/* 加载容器 */
+.loading-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: white;
+    z-index: 100;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: column;
+    flex-direction: column;
+}
+
+.loading-spinner {
+    width: 50px;
+    height: 50px;
+    border: 4px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    border-top-color: white;
+    -webkit-animation: spin 1s ease-in-out infinite;
+    animation: spin 1s ease-in-out infinite;
+    margin-bottom: 10px;
+}
+
+/* 播放器加载容器 */
+.player-loading-container {
+    width: 100%;
+    height: 0;
+    padding-bottom: 56.25%;
+    position: relative;
+    background-color: #1f2937;
+    border-radius: 8px;
+    overflow: hidden;
+    display: block;
+}
+
+.player-loading-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: column;
+    flex-direction: column;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    background-color: rgba(17, 24, 39, 0.7);
+}
+
+.player-loading-spinner {
+    width: 48px;
+    height: 48px;
+    border: 4px solid rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    border-top-color: #f97316;
+    position: relative;
+    margin-bottom: 16px;
+    -webkit-animation: spin 1s linear infinite;
+    animation: spin 1s linear infinite;
+}
+
+/* 错误容器 */
+.error-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: none;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: white;
+    z-index: 100;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: column;
+    flex-direction: column;
+    text-align: center;
+    padding: 1rem;
+}
+
+/* 集数网格 */
+.episode-grid {
+    max-height: 30vh;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+/* 开关 switch */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 46px;
+    height: 24px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #333;
+    -webkit-transition: 0.4s;
+    transition: 0.4s;
+    border-radius: 24px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 18px;
+    width: 18px;
+    left: 3px;
+    bottom: 3px;
+    background-color: white;
+    -webkit-transition: 0.4s;
+    transition: 0.4s;
+    border-radius: 50%;
+}
+
+input:checked + .slider {
+    background-color: #00ccff;
+}
+
+input:checked + .slider:before {
+    -webkit-transform: translateX(22px);
+    transform: translateX(22px);
+}
+
+/* 快捷键提示 */
+.shortcut-hint {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 1rem 2rem;
+    border-radius: 0.5rem;
+    font-size: 1.5rem;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+    z-index: 1000;
+    opacity: 0;
+    -webkit-transition: opacity 0.3s ease;
+    transition: opacity 0.3s ease;
+}
+
+.shortcut-hint > * {
+    margin-right: 0.5rem;
+}
+
+.shortcut-hint.show {
+    opacity: 1;
+}
+
+/* 恢复播放位置提示 */
+.position-restore-hint {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    -webkit-transform: translateX(-50%) translateY(100%);
+    transform: translateX(-50%) translateY(100%);
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 4px;
+    z-index: 1000;
+    -webkit-transition: -webkit-transform 0.3s ease;
+    transition: transform 0.3s ease;
+    font-size: 14px;
+}
+
+.position-restore-hint.show {
+    -webkit-transform: translateX(-50%) translateY(0);
+    transform: translateX(-50%) translateY(0);
+}
+
+.hint-content {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+}
+
+/* 全屏样式 */
+.player-container:-webkit-full-screen,
+.player-container:fullscreen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 10000;
+    background-color: #000;
+}
+
+.player-container:-webkit-full-screen #player,
+.player-container:fullscreen #player {
+    width: 100%;
+    height: 100%;
+}
+
+/* 资源信息栏 */
+#resourceInfoBarContainer {
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+    border-radius: 0.5rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.resource-info-bar-left {
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #fff;
+    -webkit-box-flex: 1;
+    -webkit-flex: 1;
+    flex: 1;
+}
+
+.resource-switch-btn {
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+    background: none;
+    border: none;
+    color: #a67c2d;
+    font-weight: bold;
+    font-size: 1rem;
+    cursor: pointer;
+    padding: 6px 12px;
+    border-radius: 0.5rem;
+    -webkit-transition: background 0.2s;
+    transition: background 0.2s;
+}
+
+.resource-switch-btn > * {
+    margin-right: 6px;
+}
+
+.resource-switch-btn:hover {
+    background: #f5e9d7;
+}
+
+.resource-switch-icon {
+    width: 20px;
+    height: 20px;
+    margin-right: 0;
+    color: #a67c2d;
+    vertical-align: middle;
+    -webkit-transition: -webkit-transform 0.3s;
+    transition: transform 0.3s;
+}
+
+/* ============================================
+   Tailwind 类 Flexbox 兼容修复
+   ============================================ */
+
+/* 确保 h-screen 在旧设备上正常工作 */
+.h-screen {
+    height: 100vh;
+}
+
+/* 确保 min-h-screen 在旧设备上正常工作 */
+.min-h-screen {
+    min-height: 100vh;
+}
+
+/* 确保 w-full 在旧设备上正常工作 */
+.w-full {
+    width: 100%;
+}
+
+/* 确保 max-w-* 在旧设备上正常工作 */
+.max-w-2xl {
+    max-width: 42rem;
+}
+
+.max-w-7xl {
+    max-width: 80rem;
+}
+
+.max-w-screen-xl {
+    max-width: 1280px;
+}
+
+/* 确保 overflow 类正常工作 */
+.overflow-hidden {
+    overflow: hidden;
+}
+
+.overflow-y-auto {
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.overflow-x-auto {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+/* 确保 rounded 类正常工作 */
+.rounded-lg {
+    border-radius: 0.5rem;
+}
+
+.rounded-full {
+    border-radius: 9999px;
+}
+
+/* ============================================
+   iOS 9 特定修复
+   ============================================ */
+
+/* iOS 惯性滚动 */
+* {
+    -webkit-overflow-scrolling: touch;
+}
+
+/* 防止 iOS 双击缩放 */
+button, a, input, select, textarea {
+    touch-action: manipulation;
+}
+
+/* 修复 iOS 上的 position: fixed 问题 */
+.fixed {
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+}
+
+/* 修复旧版 Safari 的 vh 单位问题 */
+@supports (-webkit-touch-callout: none) {
+    .h-screen {
+        height: -webkit-fill-available;
+    }
+    .min-h-screen {
+        min-height: -webkit-fill-available;
+    }
+}
+
+/* ============================================
+   Tailwind CSS 核心类回退
+   确保在不支持 JIT 的旧浏览器上正常工作
+   ============================================ */
+
+/* inset-0 回退 */
+.inset-0 {
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+
+/* 背景颜色带透明度回退 */
+.bg-black\/95,
+.bg-black\/90,
+.bg-black\/80 {
+    background-color: rgba(0, 0, 0, 0.9);
+}
+
+/* translate 回退 */
+.-translate-x-1\/2,
+.\-translate-x-1\/2 {
+    -webkit-transform: translateX(-50%);
+    transform: translateX(-50%);
+}
+
+.-translate-y-full,
+.\-translate-y-full {
+    -webkit-transform: translateY(-100%);
+    transform: translateY(-100%);
+}
+
+/* 组合 translate */
+.left-1\/2.-translate-x-1\/2,
+.left-1\/2.\-translate-x-1\/2 {
+    left: 50%;
+    -webkit-transform: translateX(-50%);
+    transform: translateX(-50%);
+}
+
+/* grid 列数回退 - 使用 flexbox */
+.grid {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-wrap: wrap;
+    flex-wrap: wrap;
+}
+
+.grid-cols-1 > * {
+    width: 100%;
+}
+
+.grid-cols-2 > * {
+    width: 50%;
+}
+
+.grid-cols-3 > * {
+    width: 33.333%;
+}
+
+.grid-cols-4 > * {
+    width: 25%;
+}
+
+.grid-cols-6 > * {
+    width: 16.666%;
+}
+
+.grid-cols-8 > * {
+    width: 12.5%;
+}
+
+/* gap 回退 */
+.gap-2 {
+    margin: -0.25rem;
+}
+.gap-2 > * {
+    padding: 0.25rem;
+}
+
+.gap-3 {
+    margin: -0.375rem;
+}
+.gap-3 > * {
+    padding: 0.375rem;
+}
+
+.gap-4 {
+    margin: -0.5rem;
+}
+.gap-4 > * {
+    padding: 0.5rem;
+}
+
+/* 响应式 grid 列数 */
+@media (min-width: 640px) {
+    .sm\:grid-cols-2 > * {
+        width: 50%;
+    }
+    .sm\:grid-cols-3 > * {
+        width: 33.333%;
+    }
+    .sm\:grid-cols-4 > * {
+        width: 25%;
+    }
+}
+
+@media (min-width: 768px) {
+    .md\:grid-cols-3 > * {
+        width: 33.333%;
+    }
+    .md\:grid-cols-4 > * {
+        width: 25%;
+    }
+    .md\:grid-cols-6 > * {
+        width: 16.666%;
+    }
+}
+
+@media (min-width: 1024px) {
+    .lg\:grid-cols-4 > * {
+        width: 25%;
+    }
+    .lg\:grid-cols-6 > * {
+        width: 16.666%;
+    }
+    .lg\:grid-cols-8 > * {
+        width: 12.5%;
+    }
+}
+
+@media (min-width: 1280px) {
+    .xl\:grid-cols-8 > * {
+        width: 12.5%;
+    }
+}
+
+/* 按钮宽度响应式 */
+@media (min-width: 640px) {
+    .sm\:w-24 {
+        width: 6rem;
+    }
+}
+
+/* max-h 回退 */
+.max-h-\[90vh\] {
+    max-height: 90vh;
+}
+
+/* border 颜色回退 */
+.border-\[\#333\] {
+    border-color: #333;
+}
+
+/* 背景颜色回退 */
+.bg-\[\#111\] {
+    background-color: #111;
+}
+
+.bg-\[\#222\] {
+    background-color: #222;
+}
+
+.bg-\[\#333\] {
+    background-color: #333;
+}
+
+/* text 颜色回退 */
+.text-white {
+    color: #ffffff;
+}
+
+.text-gray-300 {
+    color: #d1d5db;
+}
+
+.text-gray-400 {
+    color: #9ca3af;
+}
+
+.text-gray-500 {
+    color: #6b7280;
+}
+
+.text-red-500 {
+    color: #ef4444;
+}
+
+/* 动画回退 */
+@-webkit-keyframes spin {
+    from {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    to {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes spin {
+    from {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    to {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+
+.animate-spin {
+    -webkit-animation: spin 1s linear infinite;
+    animation: spin 1s linear infinite;
+}
+
+/* hover 状态 */
+.hover\:bg-\[\#333\]:hover {
+    background-color: #333;
+}
+
+.hover\:bg-\[\#444\]:hover {
+    background-color: #444;
+}
+
+.hover\:bg-gray-200:hover {
+    background-color: #e5e7eb;
+}
+
+.hover\:text-white:hover {
+    color: #ffffff;
+}
+
+.hover\:border-white:hover {
+    border-color: #ffffff;
+}
+
+/* focus 状态 */
+.focus\:outline-none:focus {
+    outline: none;
+}
+
+.focus\:border-white:focus {
+    border-color: #ffffff;
+}
+
+/* z-index 回退 */
+.z-10 {
+    z-index: 10;
+}
+
+.z-40 {
+    z-index: 40;
+}
+
+.z-50 {
+    z-index: 50;
+}
+
+.z-\[60\] {
+    z-index: 60;
+}
+
+.z-\[65\] {
+    z-index: 65;
+}
+
+/* 渐变背景回退 - 组合类处理 */
+.bg-gradient-to-r {
+    background: -webkit-linear-gradient(left, #6366f1, #a855f7, #ec4899);
+    background: linear-gradient(to right, #6366f1, #a855f7, #ec4899);
+}
+
+.bg-gradient-to-r.from-indigo-500.via-purple-500.to-pink-500 {
+    background: -webkit-linear-gradient(left, #6366f1, #a855f7, #ec4899);
+    background: linear-gradient(to right, #6366f1, #a855f7, #ec4899);
+}
+
+.hover\:from-indigo-600:hover.hover\:via-purple-600:hover.hover\:to-pink-600:hover {
+    background: -webkit-linear-gradient(left, #4f46e5, #9333ea, #db2777);
+    background: linear-gradient(to right, #4f46e5, #9333ea, #db2777);
+}
+
+/* 隐藏类 */
+.hidden {
+    display: none !important;
+}
+
+/* 可见性 */
+.opacity-0 {
+    opacity: 0;
+}
+
+.opacity-100 {
+    opacity: 1;
+}
+
+/* pointer-events */
+.pointer-events-none {
+    pointer-events: none;
+}
+
+.pointer-events-auto {
+    pointer-events: auto;
+}
+
+/* 文本处理 */
+.break-words {
+    word-wrap: break-word;
+    word-break: break-word;
+}
+
+.whitespace-nowrap {
+    white-space: nowrap;
+}
+
+.truncate {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* min-w 和 min-h */
+.min-w-0 {
+    min-width: 0;
+}
+
+.min-h-0 {
+    min-height: 0;
+}
+
+/* cursor */
+.cursor-pointer {
+    cursor: pointer;
+}
+
+/* select-none */
+.select-none {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+/* shadow */
+.shadow-lg {
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+.shadow-md {
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+/* duration */
+.duration-300 {
+    -webkit-transition-duration: 300ms;
+    transition-duration: 300ms;
+}
+
+/* border-t-transparent */
+.border-t-transparent {
+    border-top-color: transparent;
+}
+
+/* 确保模态框在旧设备上正确显示 */
+#modal,
+#passwordModal,
+#disclaimerModal,
+#loading {
+    display: none;
+}
+
+#modal.flex,
+#passwordModal.flex,
+#disclaimerModal.flex,
+#loading.flex {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+}
+
+/* ============================================
+   iPad mini 2 特定修复 (1024x768)
+   ============================================ */
+
+@media only screen 
+    and (min-device-width: 768px) 
+    and (max-device-width: 1024px) 
+    and (-webkit-min-device-pixel-ratio: 1) {
+    
+    /* 确保容器不会溢出 */
+    .container {
+        max-width: 100%;
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+    
+    /* 优化搜索框在平板上的显示 */
+    .search-box,
+    .flex.items-stretch.mb-3.h-14 {
+        max-width: 100%;
+    }
+    
+    /* 确保卡片正确显示 */
+    .card-hover {
+        margin-bottom: 1rem;
+    }
+    
+    /* 优化模态框显示 */
+    #modal > div,
+    #passwordModal > div,
+    #disclaimerModal > div {
+        max-height: 85vh;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+}
