@@ -11,15 +11,17 @@
 }
 
 .modal-content {
-    background-color: #111;
+    background-color: var(--secondary-color);
     padding: 2rem;
-    border-radius: 0.5rem;
-    border: 1px solid #333;
+    border-radius: 1rem;
+    border: none;
     width: 91.666667%;
     max-width: 56rem;
     max-height: 90vh;
     display: flex;
     flex-direction: column;
+    box-shadow: var(--neumorph-shadow-dark), var(--neumorph-shadow-light);
+    color: var(--text-color);
 }
 
 .modal-header {
@@ -33,23 +35,21 @@
 .modal-title {
     font-size: 1.5rem;
     font-weight: 700;
-    background: linear-gradient(to right, #00ccff, #ff3c78);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    color: var(--primary-color);
     word-break: break-word;
     padding-right: 1rem;
     max-width: 80%;
 }
 
 .modal-close {
-    color: #9ca3af;
+    color: var(--text-muted);
     font-size: 1.5rem;
     transition: color 0.2s;
     flex-shrink: 0;
 }
 
 .modal-close:hover {
-    color: white;
+    color: var(--accent-color);
 }
 
 .modal-body {
@@ -69,30 +69,39 @@
 
 .password-input {
     width: 100%;
-    background-color: #111;
-    border: 1px solid #333;
-    color: white;
+    background-color: var(--secondary-color);
+    border: none;
+    color: var(--text-color);
     padding: 1rem;
     border-radius: 0.5rem;
     margin-bottom: 1rem;
+    box-shadow: var(--neumorph-shadow-inset);
 }
 
 .password-input:focus {
     outline: none;
-    border-color: white;
+    box-shadow: inset 2px 2px 5px rgba(0,0,0,0.2);
 }
 
 .password-submit {
     width: 100%;
-    background-color: #3b82f6;
+    background-color: var(--primary-color);
     color: white;
     padding: 0.5rem 1rem;
-    border-radius: 0.25rem;
+    border-radius: 0.5rem;
     font-weight: 500;
+    box-shadow: var(--neumorph-shadow-dark), var(--neumorph-shadow-light);
+    transition: all 0.2s;
 }
 
 .password-submit:hover {
-    background-color: #2563eb;
+    background-color: var(--primary-light);
+    transform: translateY(-1px);
+}
+
+.password-submit:active {
+    transform: translateY(0);
+    box-shadow: var(--neumorph-shadow-inset);
 }
 
 .password-error {

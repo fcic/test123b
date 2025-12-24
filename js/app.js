@@ -487,7 +487,7 @@ function toggleSettings(e) {
     if (!settingsPanel) return;
 
     // 检查是否有管理员密码
-    const hasAdminPassword = window.__ENV__?.ADMINPASSWORD && 
+    const hasAdminPassword = (window.__ENV__ && window.__ENV__.ADMINPASSWORD) && 
                            window.__ENV__.ADMINPASSWORD.length === 64 && 
                            !/^0+$/.test(window.__ENV__.ADMINPASSWORD);
 

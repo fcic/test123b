@@ -45,7 +45,7 @@ async function searchByAPIAndKeyWord(apiId, query) {
             ...item,
             source_name: apiName,
             source_code: apiId,
-            api_url: apiId.startsWith('custom_') ? getCustomApiInfo(apiId.replace('custom_', ''))?.url : undefined
+            api_url: apiId.startsWith('custom_') ? (getCustomApiInfo(apiId.replace('custom_', '')) || {}).url : undefined
         }));
         
         // 获取总页数
@@ -87,7 +87,7 @@ async function searchByAPIAndKeyWord(apiId, query) {
                             ...item,
                             source_name: apiName,
                             source_code: apiId,
-                            api_url: apiId.startsWith('custom_') ? getCustomApiInfo(apiId.replace('custom_', ''))?.url : undefined
+                            api_url: apiId.startsWith('custom_') ? (getCustomApiInfo(apiId.replace('custom_', '')) || {}).url : undefined
                         }));
                     } catch (error) {
                         console.warn(`API ${apiId} 第${page}页搜索失败:`, error);
